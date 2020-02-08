@@ -44,6 +44,11 @@
                                     <a href="<?= $this->router->to('adminVenueCategoryEdit', ['id'=>$category->id]) ?>" class="btn btn-secondary" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
+                                        <?php if(isset($category->page)): ?>
+                                            <a href="<?= $category->page ?>" class="btn btn-secondary" title="View Page" target="_blank">
+                                                <i class="fas fa-external-link-square-alt"></i>
+                                            </a>
+                                        <?php endif; ?>
                                     <div class="btn-group btn-group-sm" role="group">
                                         <button id="category-action-<?= $category->id ?>" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                         <div class="dropdown-menu" aria-labelledby="category-action-<?= $category->id ?>">
