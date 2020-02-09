@@ -9,6 +9,7 @@ namespace AdminVenueCategory\Controller;
 
 use LibFormatter\Library\Formatter;
 use LibForm\Library\Form;
+use LibForm\Library\Combiner;
 use LibPagination\Library\Paginator;
 use AdminSiteMeta\Library\Meta;
 use VenueCategory\Model\{
@@ -42,7 +43,6 @@ class CategoryController extends \Admin\Controller
             $category = VCategory::getOne(['id'=>$id]);
             if(!$category)
                 return $this->show404();
-            Meta::parse($category, 'meta');
             $params = $this->getParams('Edit Venue Category');
         }else{
             $params = $this->getParams('Create New Venue Category');
@@ -51,10 +51,17 @@ class CategoryController extends \Admin\Controller
         $form           = new Form('admin.venue-category.edit');
         $params['form'] = $form;
 
+        $c_opts = [
+            'meta' => [null, null, 'json']
+        ];
+
+        $combiner = new Combiner($id, $c_opts, 'venue-category');
+        $category = $combiner->prepare($category);
+
         if(!($valid = $form->validate($category)) || !$form->csrfTest('noob'))
             return $this->resp('venue/category/edit', $params);
 
-        Meta::combine($valid, 'meta');
+        $valid = $combiner->finalize($valid);
 
         if($id){
             if(!VCategory::set((array)$valid, ['id'=>$id]))

@@ -2,7 +2,7 @@
 
 return [
     '__name' => 'admin-venue-category',
-    '__version' => '0.0.2',
+    '__version' => '0.1.0',
     '__git' => 'git@github.com:getmim/admin-venue-category.git',
     '__license' => 'MIT',
     '__author' => [
@@ -33,6 +33,9 @@ return [
             ],
             [
                 'admin-venue' => NULL
+            ],
+            [
+                'admin-site-meta' => NULL 
             ]
         ],
         'optional' => []
@@ -98,6 +101,13 @@ return [
     ],
     'libForm' => [
         'forms' => [
+            'admin.venue.edit' => [
+                'category' => [
+                    'label' => 'Category',
+                    'type' => 'checkbox-group',
+                    'rules' => []
+                ]
+            ],
             'admin.venue-category.edit' => [
                 '@extends' => ['std-site-meta'],
                 'name' => [
