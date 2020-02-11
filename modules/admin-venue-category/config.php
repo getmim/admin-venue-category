@@ -87,6 +87,7 @@ return [
                     'label' => 'Venue',
                     'icon' => '<i class="fas fa-map-marker-alt"></i>',
                     'priority' => 0,
+                    'filterable' => false,
                     'children' => [
                         'category' => [
                             'label' => 'Category',
